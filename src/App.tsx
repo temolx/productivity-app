@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './style/style.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import AddTask from './component/AddTask';
+import List from './component/List';
+import Inbox from './component/Inbox';
+import { useSelector } from 'react-redux'
 
-function App() {
+const App = () => {
+
+  const sidebarVisible = useSelector((state: any) => state.sidebarVisible);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="productivity-app">
+      <Container fluid>
+        <Row>
+          <Col lg={2}><Inbox /></Col>
+          <Col lg={sidebarVisible.value ? 7 : 10}><List /></Col>
+          {sidebarVisible.value ? <Col lg={3}><AddTask /></Col> : ''}
+        </Row>
+      </Container>
+      </div>
   );
 }
 

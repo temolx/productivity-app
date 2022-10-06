@@ -1,0 +1,433 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* VARIABLES */
+$main-blue: #0b265a;
+$btn-purple: #313cba;
+$faded-text: #d4dce8;
+$main-gray: #b5bdca;
+$star-yellow: #ff9d1b;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif !important;
+}
+
+@mixin titleText {
+  font-size: 25px;
+  font-weight: 700;
+  color: $main-blue;
+}
+
+@mixin hoverScale {
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+/* ADD TASK STYLING */
+
+.add-task {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  // padding: 40px;
+  height: 100%;
+
+  .priority {
+    margin-bottom: 18px;
+    display: flex;
+
+    label {
+      margin-left: 10px;
+      font-size: 15px;
+      text-transform: uppercase;
+    }
+
+    input[type="checkbox"] {
+      accent-color: $btn-purple;
+      cursor: pointer;
+    }
+  }
+
+  #eye {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-size: 25px;
+
+    @include hoverScale;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: $main-gray;
+    margin: 40px 0 25px 0;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .task-details {
+    .input {
+      display: flex;
+      flex-direction: column;
+
+      textarea {
+        resize: none;
+        background-color: none;
+        border: none;
+        font-family: "Poppins", sans-serif;
+        color: $faded-text;
+        font-weight: 500;
+        margin-bottom: 40px;
+
+        &::placeholder {
+          color: $faded-text;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      input {
+        background-color: none;
+        border: none;
+        margin-bottom: 30px;
+        font-family: "Poppins", sans-serif;
+        font-size: 25px;
+        font-weight: 700;
+        color: $main-blue;
+
+        &::placeholder {
+          color: $main-blue;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .category {
+    margin-bottom: 30px;
+    .color-options-container {
+      display: flex;
+
+      .color-options {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        border-radius: 50px;
+        margin-right: 20px;
+        cursor: pointer;
+      }
+
+      .active-color {
+        outline: 5px solid #fff;
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.112);
+      }
+    }
+  }
+
+  .duration {
+    display: block;
+    margin-bottom: 80px;
+
+    .duration-input-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background-color: #f4f7fc;
+      border: $main-gray 0.1px solid;
+      border-radius: 30px;
+
+      #timer {
+        font-size: 22px;
+      }
+
+      .duration-input {
+        display: flex;
+        margin-top: 5px;
+
+        .time-input {
+          display: flex;
+
+          input {
+            position: relative;
+            font-family: "Poppins", sans-serif;
+            border: none;
+            width: 22px;
+            height: 22px;
+            background-color: #f4f7fc;
+            font-size: 17px;
+            font-weight: 700;
+
+            &::placeholder {
+              color: $main-blue;
+            }
+
+            &:focus {
+              outline: none;
+            }
+
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              appearance: none;
+            }
+          }
+
+          h2 {
+            color: $main-blue;
+            font-size: 17px;
+            margin-top: 1px;
+          }
+
+          #hours {
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+
+    button {
+      margin-top: 55px;
+    }
+  }
+
+  button {
+    padding: 15px 20px;
+    color: #fff;
+    background-color: $btn-purple;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.141);
+
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #20298b;
+    }
+  }
+}
+
+/* TASK LIST STYLING */
+.task-list {
+  padding: 70px;
+  background-color: #f4f7fc;
+  height: 100vh;
+  // height: 100%;
+
+  .time {
+    display: flex;
+    justify-content: space-between;
+
+    #add-icon {
+      font-size: 25px;
+      color: $main-gray;
+      @include hoverScale;
+    }
+
+    .time-info {
+      display: flex;
+
+      h3 {
+        @include titleText;
+        margin-right: 10px;
+      }
+
+      h2 {
+        color: $main-gray;
+        font-weight: 500;
+        font-size: 25px;
+      }
+    }
+  }
+
+  .list {
+    margin-top: 45px;
+
+    .list-item {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 10px;
+      padding: 20px 40px;
+      background-color: #fff;
+      overflow: hidden;
+      box-shadow: 0px 0px 40px 10px rgba(0, 0, 0, 0.041);
+      margin-bottom: 20px;
+
+      .category-line {
+        position: absolute;
+        // background-color: red;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 40px;
+        border-radius: 10px;
+      }
+
+      .right {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .star {
+          margin-left: 50px;
+          font-size: 24px;
+          color: $main-gray;
+          cursor: pointer;
+        }
+
+        .active-star {
+          color: $star-yellow;
+        }
+
+        h5 {
+          color: $main-gray;
+          font-weight: 600;
+          font-size: 18px;
+        }
+      }
+
+      // &::before {
+      //   content: "";
+      //   position: absolute;
+      //   top: 10px;
+      //   left: 0;
+      //   background-color: red;
+      //   width: 4px;
+      //   height: 45px;
+      //   border-radius: 10px;
+      // }
+
+      h5 {
+        font-weight: 700;
+        font-size: 18px;
+        color: $main-blue;
+        cursor: pointer;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
+  }
+}
+
+/* INBOX STYLING */
+.inbox {
+  // padding: 70px;
+
+  h3 {
+    @include titleText();
+    font-size: 33px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 35px;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+
+      margin-bottom: 30px;
+      font-weight: 600;
+      color: $main-gray;
+      font-size: 16px;
+
+      .text {
+        display: flex;
+        transition: 0.3s ease-in-out;
+
+        #star {
+          font-size: 20px;
+          margin-right: 10px;
+        }
+      }
+
+      .text-active {
+        color: $main-blue;
+      }
+
+      h3 {
+        font-size: 16px;
+        font-weight: 500;
+        color: $main-gray;
+        margin: 3px 0 0 10px;
+      }
+    }
+  }
+
+  .color-categories {
+    position: relative;
+
+    &:hover {
+      color: $main-blue;
+    }
+
+    .color-filter-container {
+      display: block;
+      position: absolute;
+      top: 40px;
+      left: 28px;
+      padding: 15px 10px;
+      border-radius: 5px;
+      box-shadow: 10px 10px 27px -1px rgba(0, 0, 0, 0.15);
+
+      .color-filter {
+        width: 80px;
+        height: 20px;
+        border-radius: 5px;
+        transition: 0.2s ease-in-out;
+
+        &:not(&:last-child) {
+          margin-bottom: 15px;
+        }
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .color-filter-cancel {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid $main-blue;
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 1px;
+          bottom: 8px;
+          transform: rotate(-10deg);
+
+          background-color: $main-blue;
+        }
+      }
+    }
+    .text {
+      padding-bottom: 50px;
+    }
+  }
+}
