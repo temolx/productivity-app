@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { AiFillStar, AiOutlinePlus } from 'react-icons/ai'
 import { useSelector, useDispatch } from 'react-redux'
 import { tasksType } from '../redux/slices/tasksSlice'
@@ -12,6 +12,8 @@ const List: FC = () => {
   const currentColor = useSelector((state: any) => state.currentColor);
 
   const dispatch = useDispatch();
+
+  const[visibleDesc, setVisibleDesc] = useState<string>('');
 
   return (
         <div className='task-list'>
@@ -43,7 +45,14 @@ const List: FC = () => {
             }).map((task: tasksType) => (            
               <div className="list-item">
                   <div className='category-line' style={{ backgroundColor: `#${task.currentColor}` }}></div>
-                  <h5>{ task.name }</h5>
+
+                  <div className="task-info" onMouseEnter={() => setVisibleDesc(task.name)} onMouseLeave={() => setVisibleDesc('')}>
+                      <h5>{ task.name }</h5>
+                      
+                      { visibleDesc === task.name ? <div className='description'>
+                        <p>{ task.desc }</p>
+                      </div> : null }
+                  </div>
 
                   <div className="right">
                     <h5>{ task.duration.hours }h { task.duration.minutes }m</h5>

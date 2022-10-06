@@ -225,6 +225,11 @@ body {
       background-color: #20298b;
     }
   }
+
+  .error {
+    color: rgb(234, 0, 0);
+    margin-top: 10px;
+  }
 }
 
 /* TASK LIST STYLING */
@@ -270,19 +275,36 @@ body {
       border-radius: 10px;
       padding: 20px 40px;
       background-color: #fff;
-      overflow: hidden;
+      // overflow: hidden;
       box-shadow: 0px 0px 40px 10px rgba(0, 0, 0, 0.041);
       margin-bottom: 20px;
 
       .category-line {
         position: absolute;
-        // background-color: red;
         top: 50%;
         left: 0;
         transform: translateY(-50%);
         width: 4px;
         height: 40px;
         border-radius: 10px;
+      }
+
+      .task-info {
+        position: relative;
+
+        .description {
+          position: absolute;
+          top: 30px;
+          left: 0;
+          width: 300px;
+
+          padding: 15px;
+          background-color: #fff;
+          z-index: 999;
+          border-radius: 10px;
+          box-shadow: 0px 0px 40px 10px rgba(0, 0, 0, 0.041);
+          overflow: hidden;
+        }
       }
 
       .right {

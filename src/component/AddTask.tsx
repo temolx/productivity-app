@@ -1,7 +1,8 @@
 import { FC, useState } from 'react'
 import { MdTimer, MdRemoveRedEye } from 'react-icons/md'
 import { colors } from '../colors'
-import { useDispatch } from 'react-redux'
+import { tasksType } from '../redux/slices/tasksSlice'
+import { useDispatch, useSelector } from 'react-redux'
 import { hide } from '../redux/slices/sidebarSlice'
 import { addTask } from '../redux/slices/tasksSlice'
 
@@ -16,26 +17,67 @@ const AddTask: FC = () => {
     })
     const[priority, setPriority] = useState<boolean>(false);
 
-    const dispatch = useDispatch();
+    const[error, setError] = useState<string>('');
 
+    const dispatch = useDispatch();
+    const tasks = useSelector((state: any) => state.tasks);
+
+
+    const validateName = () => {
+        if (name.length !== 0) {
+            if (name.length > 20) {
+                setError('Task title must be 20 characters or less.');
+                return false;
+            }
+            if (tasks.value.some((task: tasksType) => task.name.toLocaleLowerCase() === name.toLocaleLowerCase())) {
+                setError('Task already exists.');
+                return false;
+            }
+
+            setError('');
+            return true;
+        }
+        else {
+            setError('You must enter a task title.');
+            return false;
+        }
+    }
+
+    const validateDesc = () => {
+        if (desc.length !== 0) {
+            if (desc.length > 100) {
+                setError('Description must be 100 characters or less.');
+                return false;
+            }
+
+            setError('');
+            return true;
+        }
+        else {
+            setError('You must enter a task description.');
+            return false;
+        }
+    }
 
     const submitTask = (): void => {
-        dispatch(addTask({
-            name: name,
-            desc: desc,
-            currentColor: currentColor,
-            duration: duration,
-            priority: priority
-        }))
+        if (validateName() && validateDesc()) {
+            dispatch(addTask({
+                name: name,
+                desc: desc,
+                currentColor: currentColor,
+                duration: duration,
+                priority: priority
+            }))
 
-        setName('What\'s New?');
-        setDesc('Type some details about your task');
-        setCurrentColor(colors[4]);
-        setDuration({
-            hours: 1,
-            minutes: 5
-        })
-        setPriority(false);
+            setName('What\'s New?');
+            setDesc('Type some details about your task');
+            setCurrentColor(colors[4]);
+            setDuration({
+                hours: 1,
+                minutes: 5
+            })
+            setPriority(false);
+        }
     }
 
   return (
@@ -93,6 +135,8 @@ const AddTask: FC = () => {
         </div>
 
         <button onClick={submitTask}>Create Task</button>
+
+        <p className='error'>{ error }</p>
     </div>
   )
 }
