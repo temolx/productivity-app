@@ -215,6 +215,7 @@ body {
   transform: scale(1.2);
 }
 .task-list .time .time-info {
+  position: relative;
   display: flex;
 }
 .task-list .time .time-info h3 {
@@ -227,6 +228,33 @@ body {
   color: #b5bdca;
   font-weight: 500;
   font-size: 25px;
+  margin-right: 15px;
+}
+@-webkit-keyframes colorBubbleAnim {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+@keyframes colorBubbleAnim {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+.task-list .time .time-info .current-color {
+  position: absolute;
+  top: -7px;
+  right: 0px;
+  width: 14px;
+  height: 14px;
+  border-radius: 20px;
+  -webkit-animation: colorBubbleAnim 0.3s ease-in-out;
+          animation: colorBubbleAnim 0.3s ease-in-out;
 }
 .task-list .list {
   margin-top: 45px;
@@ -275,6 +303,10 @@ body {
   font-size: 24px;
   color: #b5bdca;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.task-list .list .list-item .right .star:hover {
+  transform: scale(1.2);
 }
 .task-list .list .list-item .right .active-star {
   color: #ff9d1b;
@@ -373,5 +405,5 @@ body {
   background-color: #0b265a;
 }
 .inbox .color-categories .text {
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }/*# sourceMappingURL=style.css.map */

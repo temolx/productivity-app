@@ -28,8 +28,11 @@ export const tasksSlice = createSlice({
                     el.priority = !el.priority;
                 }
             })
+        },
+        removeTask: (state: tasksState, action: PayloadAction<string>) => {
+            state.value = state.value.filter((el) => el.name !== action.payload);
         }
     }
 })
 
-export const { addTask, changePriorityStatus } = tasksSlice.actions;
+export const { addTask, changePriorityStatus, removeTask } = tasksSlice.actions;

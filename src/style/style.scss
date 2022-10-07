@@ -250,6 +250,7 @@ body {
     }
 
     .time-info {
+      position: relative;
       display: flex;
 
       h3 {
@@ -261,6 +262,26 @@ body {
         color: $main-gray;
         font-weight: 500;
         font-size: 25px;
+        margin-right: 15px;
+      }
+
+      @keyframes colorBubbleAnim {
+        0% {
+          transform: scale(0);
+        }
+        100% {
+          transform: scale(100%);
+        }
+      }
+
+      .current-color {
+        position: absolute;
+        top: -7px;
+        right: 0px;
+        width: 14px;
+        height: 14px;
+        border-radius: 20px;
+        animation: colorBubbleAnim 0.3s ease-in-out;
       }
     }
   }
@@ -316,7 +337,13 @@ body {
           margin-left: 50px;
           font-size: 24px;
           color: $main-gray;
+
           cursor: pointer;
+          transition: 0.3s ease-in-out;
+
+          &:hover {
+            transform: scale(1.2);
+          }
         }
 
         .active-star {
@@ -449,7 +476,7 @@ body {
       }
     }
     .text {
-      padding-bottom: 50px;
+      padding-bottom: 30px;
     }
   }
 }

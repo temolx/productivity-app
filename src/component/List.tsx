@@ -3,7 +3,7 @@ import { AiFillStar, AiOutlinePlus } from 'react-icons/ai'
 import { useSelector, useDispatch } from 'react-redux'
 import { tasksType } from '../redux/slices/tasksSlice'
 import { show } from '../redux/slices/sidebarSlice'
-import { changePriorityStatus } from '../redux/slices/tasksSlice'
+import { changePriorityStatus, removeTask } from '../redux/slices/tasksSlice'
 
 const List: FC = () => {
 
@@ -21,6 +21,7 @@ const List: FC = () => {
             <div className="time-info">
               <h3>Today</h3>
               <h2>{ tasks.value.reduce((prev: number, curr: tasksType) => prev + curr.duration.hours, 0) }h { tasks.value.reduce((prev: number, curr: tasksType) => prev + curr.duration.minutes, 0) }m</h2>
+              { currentColor.value !== '' ? <div className="current-color" style={{ backgroundColor: `#${currentColor.value}` }}></div> : null }
             </div>
 
               <AiOutlinePlus id="add-icon" onClick={() => dispatch(show())} />
@@ -47,7 +48,7 @@ const List: FC = () => {
                   <div className='category-line' style={{ backgroundColor: `#${task.currentColor}` }}></div>
 
                   <div className="task-info" onMouseEnter={() => setVisibleDesc(task.name)} onMouseLeave={() => setVisibleDesc('')}>
-                      <h5>{ task.name }</h5>
+                      <h5 onClick={() => dispatch(removeTask(task.name))}>{ task.name }</h5>
                       
                       { visibleDesc === task.name ? <div className='description'>
                         <p>{ task.desc }</p>

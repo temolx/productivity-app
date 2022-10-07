@@ -56,10 +56,10 @@ const Inbox: FC = () => {
 
                 { colorsVisible ? <div className="color-filter-container">
                     { colors.map((color: string) => (
-                        <div className="color-filter" style={{ backgroundColor: `#${color}` }} onClick={() => dispatch(setColor(color))} />
+                        <div className="color-filter" style={{ backgroundColor: `#${color}` }} onClick={() => { dispatch(setColor(color)); setColorsVisible(false) }} />
                     )) }
 
-                        <div className="color-filter color-filter-cancel" onClick={() => dispatch(setColor(''))} />
+                        <div className="color-filter color-filter-cancel" onClick={() => { dispatch(setColor('')); setColorsVisible(false) }} />
                 </div> : null }
             </li>
         </ul>
