@@ -16,9 +16,9 @@ const App = () => {
       <div className="productivity-app">
       <Container fluid>
         <Row>
-          <Col lg={2}><Inbox /></Col>
+          <Col lg={2} className='d-none d-lg-block'><Inbox /></Col>
           <Col lg={sidebarVisible.value ? 7 : 10}><List /></Col>
-          {sidebarVisible.value ? <Col lg={3}><AddTask /></Col> : ''}
+          {sidebarVisible.value ? <Col lg={3} className='d-none d-lg-block'><AddTask /></Col> : ''}
         </Row>
       </Container>
       </div>

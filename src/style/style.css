@@ -11,10 +11,27 @@ body {
 }
 
 /* ADD TASK STYLING */
+@-webkit-keyframes addTaskAnim {
+  0% {
+    transform: translateX(500px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes addTaskAnim {
+  0% {
+    transform: translateX(500px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 .add-task {
   display: flex;
   flex-direction: column;
   background-color: #fff;
+  padding: 30px;
   height: 100%;
 }
 .add-task .priority {
@@ -100,6 +117,7 @@ body {
 }
 .add-task .category .color-options-container {
   display: flex;
+  position: absolute;
 }
 .add-task .category .color-options-container .color-options {
   position: relative;
@@ -125,6 +143,8 @@ body {
   background-color: #f4f7fc;
   border: #b5bdca 0.1px solid;
   border-radius: 30px;
+  overflow: hidden;
+  min-width: 220px;
 }
 .add-task .duration .duration-input-container #timer {
   font-size: 22px;
@@ -137,7 +157,6 @@ body {
   display: flex;
 }
 .add-task .duration .duration-input-container .duration-input .time-input input {
-  position: relative;
   font-family: "Poppins", sans-serif;
   border: none;
   width: 22px;
@@ -167,6 +186,7 @@ body {
   color: #0b265a;
   font-size: 17px;
   margin-top: 1px;
+  width: 100%;
 }
 .add-task .duration .duration-input-container .duration-input .time-input #hours {
   margin-right: 15px;
@@ -259,6 +279,22 @@ body {
 .task-list .list {
   margin-top: 45px;
 }
+@-webkit-keyframes listItemAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+@keyframes listItemAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
 .task-list .list .list-item {
   position: relative;
   display: flex;
@@ -268,6 +304,8 @@ body {
   background-color: #fff;
   box-shadow: 0px 0px 40px 10px rgba(0, 0, 0, 0.041);
   margin-bottom: 20px;
+  -webkit-animation: listItemAnim 0.4s ease-in-out;
+          animation: listItemAnim 0.4s ease-in-out;
 }
 .task-list .list .list-item .category-line {
   position: absolute;
@@ -406,4 +444,57 @@ body {
 }
 .inbox .color-categories .text {
   padding-bottom: 30px;
+}
+
+/* EMPTY PAGE STYLING */
+@-webkit-keyframes emptyAnim {
+  0% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+  100% {
+    opacity: 100%;
+    transform: scale(100%);
+  }
+}
+@keyframes emptyAnim {
+  0% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+  100% {
+    opacity: 100%;
+    transform: scale(100%);
+  }
+}
+.empty {
+  text-align: center;
+  margin-top: 250px;
+  -webkit-animation: emptyAnim 0.5s ease-in-out;
+          animation: emptyAnim 0.5s ease-in-out;
+}
+.empty .empty-box {
+  font-size: 75px;
+}
+.empty p {
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+/* RESPONSIVITY */
+@media only screen and (max-width: 1300px) {
+  #timer {
+    display: none;
+  }
+}
+@media only screen and (max-width: 992px) {
+  #timer {
+    display: flex;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .right h5 {
+    display: none;
+  }
 }/*# sourceMappingURL=style.css.map */

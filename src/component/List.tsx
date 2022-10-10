@@ -1,9 +1,10 @@
-import { FC, useState } from 'react'
+import { FC, useMemo, useState } from 'react'
 import { AiFillStar, AiOutlinePlus } from 'react-icons/ai'
 import { useSelector, useDispatch } from 'react-redux'
 import { tasksType } from '../redux/slices/tasksSlice'
 import { show } from '../redux/slices/sidebarSlice'
 import { changePriorityStatus, removeTask } from '../redux/slices/tasksSlice'
+import EmptyPage from './EmptyPage'
 
 const List: FC = () => {
 
@@ -14,6 +15,26 @@ const List: FC = () => {
   const dispatch = useDispatch();
 
   const[visibleDesc, setVisibleDesc] = useState<string>('');
+
+  const filteredTasks = useMemo(() => {
+    return tasks.value.filter((el: tasksType) => {
+      if (currentCategory.value === 0) {
+        return el;
+      }
+      else if (currentCategory.value === 1) {
+        return el.priority;
+      }
+      else {
+        return !el.priority;
+      }
+    }).filter((el: tasksType) => {
+      if (currentColor.value === '') {
+        return el;
+      }
+      else return el.currentColor === currentColor.value;
+    })
+  }, [tasks, currentCategory, currentColor])
+
 
   return (
         <div className='task-list'>
@@ -28,22 +49,7 @@ const List: FC = () => {
           </div>
 
           <div className="list">
-            {tasks && tasks.value.filter((el: tasksType) => {
-              if (currentCategory.value === 0) {
-                return el;
-              }
-              else if (currentCategory.value === 1) {
-                return el.priority;
-              }
-              else {
-                return !el.priority;
-              }
-            }).filter((el: tasksType) => {
-              if (currentColor.value === '') {
-                return el;
-              }
-              else return el.currentColor === currentColor.value;
-            }).map((task: tasksType) => (            
+            {filteredTasks.length !== 0 ? filteredTasks.map((task: tasksType) => (            
               <div className="list-item">
                   <div className='category-line' style={{ backgroundColor: `#${task.currentColor}` }}></div>
 
@@ -60,7 +66,7 @@ const List: FC = () => {
                     <AiFillStar className={ task.priority ? 'star active-star' : 'star' } onClick={() => dispatch(changePriorityStatus(task.name))} />
                   </div>
               </div>
-            ))}
+            )) : <EmptyPage />}
           </div>
         </div>
   )
