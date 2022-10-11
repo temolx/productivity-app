@@ -10,6 +10,10 @@ body {
   font-family: "Poppins", sans-serif !important;
 }
 
+.productivity-app {
+  background-color: #f4f7fc;
+}
+
 /* ADD TASK STYLING */
 @-webkit-keyframes addTaskAnim {
   0% {
@@ -47,7 +51,8 @@ body {
   accent-color: #313cba;
   cursor: pointer;
 }
-.add-task #eye {
+.add-task #eye,
+.add-task #eye-mobile {
   position: absolute;
   top: 25px;
   right: 25px;
@@ -55,8 +60,12 @@ body {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
-.add-task #eye:hover {
+.add-task #eye:hover,
+.add-task #eye-mobile:hover {
   transform: scale(1.2);
+}
+.add-task #eye-mobile {
+  display: none;
 }
 .add-task h3 {
   font-size: 15px;
@@ -218,20 +227,38 @@ body {
 /* TASK LIST STYLING */
 .task-list {
   padding: 70px;
-  background-color: #f4f7fc;
   height: 100vh;
 }
 .task-list .time {
   display: flex;
   justify-content: space-between;
 }
-.task-list .time #add-icon {
+.task-list .time .list-icons {
+  display: flex;
+}
+.task-list .time .list-icons #add-icon,
+.task-list .time .list-icons #add-icon-mobile {
+  font-size: 25px;
+  color: #b5bdca;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  margin-right: 20px;
+}
+.task-list .time .list-icons #add-icon:hover,
+.task-list .time .list-icons #add-icon-mobile:hover {
+  transform: scale(1.2);
+}
+.task-list .time .list-icons #add-icon-mobile {
+  display: none;
+}
+.task-list .time .list-icons #mobile-filters-icon {
+  display: none;
   font-size: 25px;
   color: #b5bdca;
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
-.task-list .time #add-icon:hover {
+.task-list .time .list-icons #mobile-filters-icon:hover {
   transform: scale(1.2);
 }
 .task-list .time .time-info {
@@ -364,7 +391,27 @@ body {
 }
 
 /* INBOX STYLING */
-.inbox h3 {
+.inbox {
+  background-color: #fff;
+  padding: 70px 20px;
+  height: 100%;
+}
+.inbox .inbox-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.inbox .inbox-header #eye-inbox-mobile {
+  display: none;
+  font-size: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.inbox .inbox-header #eye-inbox-mobile:hover {
+  transform: scale(1.2);
+}
+.inbox .inbox-header h3 {
   font-size: 25px;
   font-weight: 700;
   color: #0b265a;
@@ -487,10 +534,34 @@ body {
   #timer {
     display: none;
   }
+  .task-amount {
+    display: none;
+  }
 }
 @media only screen and (max-width: 992px) {
   #timer {
     display: flex;
+  }
+  .inbox {
+    padding: 160px 60px;
+  }
+  .inbox ul li .task-amount {
+    display: flex;
+  }
+  .inbox .inbox-header #eye-inbox-mobile {
+    display: flex;
+  }
+  .add-task #eye-mobile {
+    display: flex;
+  }
+  .task-list .time .list-icons #mobile-filters-icon {
+    display: flex;
+  }
+  .task-list .time .list-icons #add-icon-mobile {
+    display: flex;
+  }
+  .task-list .time .list-icons #add-icon {
+    display: none;
   }
 }
 @media only screen and (max-width: 576px) {

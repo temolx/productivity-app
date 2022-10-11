@@ -32,6 +32,10 @@ body {
   }
 }
 
+.productivity-app {
+  background-color: #f4f7fc;
+}
+
 /* ADD TASK STYLING */
 
 @keyframes addTaskAnim {
@@ -67,13 +71,18 @@ body {
     }
   }
 
-  #eye {
+  #eye,
+  #eye-mobile {
     position: absolute;
     top: 25px;
     right: 25px;
     font-size: 25px;
 
     @include hoverScale;
+  }
+
+  #eye-mobile {
+    display: none;
   }
 
   h3 {
@@ -249,7 +258,7 @@ body {
 /* TASK LIST STYLING */
 .task-list {
   padding: 70px;
-  background-color: #f4f7fc;
+  // background-color: #f4f7fc;
   height: 100vh;
   // height: 100%;
 
@@ -257,10 +266,28 @@ body {
     display: flex;
     justify-content: space-between;
 
-    #add-icon {
-      font-size: 25px;
-      color: $main-gray;
-      @include hoverScale;
+    .list-icons {
+      display: flex;
+
+      #add-icon,
+      #add-icon-mobile {
+        font-size: 25px;
+        color: $main-gray;
+        @include hoverScale;
+
+        margin-right: 20px;
+      }
+
+      #add-icon-mobile {
+        display: none;
+      }
+
+      #mobile-filters-icon {
+        display: none;
+        font-size: 25px;
+        color: $main-gray;
+        @include hoverScale();
+      }
     }
 
     .time-info {
@@ -407,11 +434,27 @@ body {
 
 /* INBOX STYLING */
 .inbox {
-  // padding: 70px;
+  background-color: #fff;
+  // background-color: red;
+  padding: 70px 20px;
+  height: 100%;
 
-  h3 {
-    @include titleText();
-    font-size: 33px;
+  .inbox-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    #eye-inbox-mobile {
+      display: none;
+      font-size: 25px;
+      margin-bottom: 5px;
+      @include hoverScale;
+    }
+
+    h3 {
+      @include titleText();
+      font-size: 33px;
+    }
   }
 
   ul {
@@ -541,11 +584,58 @@ body {
   #timer {
     display: none;
   }
+
+  .task-amount {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 992px) {
   #timer {
     display: flex;
+  }
+
+  .inbox {
+    padding: 160px 60px;
+    ul {
+      li {
+        .task-amount {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  .inbox {
+    .inbox-header {
+      #eye-inbox-mobile {
+        display: flex;
+      }
+    }
+  }
+
+  .add-task {
+    #eye-mobile {
+      display: flex;
+    }
+  }
+
+  .task-list {
+    .time {
+      .list-icons {
+        #mobile-filters-icon {
+          display: flex;
+        }
+
+        #add-icon-mobile {
+          display: flex;
+        }
+
+        #add-icon {
+          display: none;
+        }
+      }
+    }
   }
 }
 

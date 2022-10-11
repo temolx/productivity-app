@@ -1,12 +1,18 @@
 import { FC, useMemo, useState } from 'react'
 import { AiFillStar, AiOutlinePlus } from 'react-icons/ai'
+import { BsFilterLeft } from 'react-icons/bs'
 import { useSelector, useDispatch } from 'react-redux'
 import { tasksType } from '../redux/slices/tasksSlice'
 import { show } from '../redux/slices/sidebarSlice'
 import { changePriorityStatus, removeTask } from '../redux/slices/tasksSlice'
 import EmptyPage from './EmptyPage'
 
-const List: FC = () => {
+export interface IProps {
+  setFiltersVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  setSidebarMobile: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const List: FC<IProps> = ({ setFiltersVisible, setSidebarMobile }: IProps) => {
 
   const tasks = useSelector((state: any) => state.tasks);
   const currentCategory = useSelector((state: any) => state.currentCategory);
@@ -45,7 +51,11 @@ const List: FC = () => {
               { currentColor.value !== '' ? <div className="current-color" style={{ backgroundColor: `#${currentColor.value}` }}></div> : null }
             </div>
 
-              <AiOutlinePlus id="add-icon" onClick={() => dispatch(show())} />
+              <div className="list-icons">
+                <AiOutlinePlus id="add-icon" onClick={() => dispatch(show())} />
+                <AiOutlinePlus id="add-icon-mobile" onClick={() => setSidebarMobile(true)} />
+                <BsFilterLeft id="mobile-filters-icon" onClick={() => setFiltersVisible(true)} />
+              </div>
           </div>
 
           <div className="list">

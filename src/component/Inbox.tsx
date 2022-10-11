@@ -5,8 +5,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { showAll, showPriority, showNormal } from '../redux/slices/categoryslice'
 import { setColor } from '../redux/slices/colorSlice'
 import { colors } from '../colors'
+import { MdRemoveRedEye } from 'react-icons/md'
 
-const Inbox: FC = () => {
+export interface IProps {
+    setFiltersVisible: React.Dispatch<React.SetStateAction<boolean>>
+  }
+
+const Inbox: FC<IProps> = ({ setFiltersVisible }: IProps) => {
 
     const[colorsVisible, setColorsVisible] = useState<boolean>(false);
     
@@ -20,31 +25,34 @@ const Inbox: FC = () => {
 
   return (
     <div className='inbox'>
-        <h3>Inbox</h3>
+        <div className="inbox-header">
+            <h3>Inbox</h3>
+            <MdRemoveRedEye id="eye-inbox-mobile" onClick={() => setFiltersVisible(false)} />
+        </div>
 
         <ul>
             <li>
-                <div className={currentCategory.value === 0 ? 'text text-active' : 'text'} onClick={() => dispatch(showAll())}>
+                <div className={currentCategory.value === 0 ? 'text text-active' : 'text'} onClick={() => {dispatch(showAll()); setFiltersVisible(false)}}>
                     <AiFillStar id="star" /> Objectives
                 </div>
 
-                <h3>{ tasks.value.length }</h3>
+                <h3 className='task-amount'>{ tasks.value.length }</h3>
             </li>
 
             <li>
-                <div className={currentCategory.value === 1 ? 'text text-active' : 'text'} onClick={() => dispatch(showPriority())}>
+                <div className={currentCategory.value === 1 ? 'text text-active' : 'text'} onClick={() => {dispatch(showPriority()); setFiltersVisible(false)}}>
                     <AiTwotoneCalendar id="star" /> Priority Project
                 </div>
 
-                <h3>{ priorityTasks.length }</h3>
+                <h3 className='task-amount'>{ priorityTasks.length }</h3>
             </li>
 
             <li>
-                <div className={currentCategory.value === 2 ? 'text text-active' : 'text'} onClick={() => dispatch(showNormal())}>
+                <div className={currentCategory.value === 2 ? 'text text-active' : 'text'} onClick={() => {dispatch(showNormal()); setFiltersVisible(false)}}>
                     <RiTimeLine id="star" /> Someday
                 </div>
 
-                <h3>{ normalTasks.length }</h3>
+                <h3 className='task-amount'>{ normalTasks.length }</h3>
             </li>
 
             <li className='color-categories' onMouseLeave={() => setColorsVisible(false)}>
@@ -52,14 +60,14 @@ const Inbox: FC = () => {
                     <RiRainbowLine id="star" /> Category
                 </div>
 
-                <h3>4</h3>
+                <h3 className='task-amount'>4</h3>
 
                 { colorsVisible ? <div className="color-filter-container">
                     { colors.map((color: string) => (
-                        <div className="color-filter" style={{ backgroundColor: `#${color}` }} onClick={() => { dispatch(setColor(color)); setColorsVisible(false) }} />
+                        <div className="color-filter" style={{ backgroundColor: `#${color}` }} onClick={() => { dispatch(setColor(color)); setColorsVisible(false); setFiltersVisible(false) }} />
                     )) }
 
-                        <div className="color-filter color-filter-cancel" onClick={() => { dispatch(setColor('')); setColorsVisible(false) }} />
+                        <div className="color-filter color-filter-cancel" onClick={() => { dispatch(setColor('')); setColorsVisible(false); setFiltersVisible(false) }} />
                 </div> : null }
             </li>
         </ul>

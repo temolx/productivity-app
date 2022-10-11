@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { hide } from '../redux/slices/sidebarSlice'
 import { addTask } from '../redux/slices/tasksSlice'
 
-const AddTask: FC = () => {
+interface IProps {
+    setSidebarMobile: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const AddTask: FC<IProps> = ({ setSidebarMobile }: IProps) => {
 
     const[name, setName] = useState<string>('What\'s New?');
     const[desc, setDesc] = useState<string>('Type some details about your task');
@@ -77,12 +81,15 @@ const AddTask: FC = () => {
                 minutes: 5
             })
             setPriority(false);
+
+        setSidebarMobile(false);
         }
     }
 
   return (
     <div className='add-task'>
         <MdRemoveRedEye id="eye" onClick={() => dispatch(hide())} />
+        <MdRemoveRedEye id="eye-mobile" onClick={() => setSidebarMobile(false)} />
         
         <div className="task-details">
             <h3>Task</h3>
