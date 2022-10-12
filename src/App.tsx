@@ -7,11 +7,12 @@ import AddTask from './component/AddTask';
 import List from './component/List';
 import Inbox from './component/Inbox';
 import { useSelector } from 'react-redux'
-import { useState } from 'react';
+import { useState, FC } from 'react';
+import { RootState } from './redux/store';
 
-const App = () => {
+const App: FC = () => {
 
-  const sidebarVisible = useSelector((state: any) => state.sidebarVisible);
+  const sidebarVisible = useSelector((state: RootState) => state.sidebarVisible);
 
   const[filtersVisible, setFiltersVisible] = useState<boolean>(false);
   const[siderbarMobile, setSidebarMobile] = useState<boolean>(false);

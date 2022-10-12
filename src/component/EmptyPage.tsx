@@ -1,4 +1,3 @@
-import React from 'react'
 import { AiOutlineDropbox } from 'react-icons/ai'
 
 function EmptyPage() {

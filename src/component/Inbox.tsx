@@ -6,6 +6,8 @@ import { showAll, showPriority, showNormal } from '../redux/slices/categoryslice
 import { setColor } from '../redux/slices/colorSlice'
 import { colors } from '../colors'
 import { MdRemoveRedEye } from 'react-icons/md'
+import { RootState } from '../redux/store'
+import { tasksType } from '../redux/slices/tasksSlice'
 
 export interface IProps {
     setFiltersVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -17,11 +19,11 @@ const Inbox: FC<IProps> = ({ setFiltersVisible }: IProps) => {
     
     const dispatch  = useDispatch();
 
-    const currentCategory = useSelector((state: any) => state.currentCategory); // 0 - objectives, 1 - tomorrow, 2 - future
-    const tasks = useSelector((state: any) => state.tasks);
+    const currentCategory = useSelector((state: RootState) => state.currentCategory); // 0 - objectives, 1 - tomorrow, 2 - future
+    const tasks = useSelector((state: RootState) => state.tasks);
 
-    let priorityTasks = tasks.value.filter((el: any) => el.priority);
-    let normalTasks = tasks.value.filter((el: any) => !el.priority);
+    let priorityTasks = tasks.value.filter((el: tasksType) => el.priority);
+    let normalTasks = tasks.value.filter((el: tasksType) => !el.priority);
 
   return (
     <div className='inbox'>

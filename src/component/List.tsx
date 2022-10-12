@@ -6,6 +6,7 @@ import { tasksType } from '../redux/slices/tasksSlice'
 import { show } from '../redux/slices/sidebarSlice'
 import { changePriorityStatus, removeTask } from '../redux/slices/tasksSlice'
 import EmptyPage from './EmptyPage'
+import { RootState } from '../redux/store'
 
 export interface IProps {
   setFiltersVisible: React.Dispatch<React.SetStateAction<boolean>>,
@@ -14,9 +15,9 @@ export interface IProps {
 
 const List: FC<IProps> = ({ setFiltersVisible, setSidebarMobile }: IProps) => {
 
-  const tasks = useSelector((state: any) => state.tasks);
-  const currentCategory = useSelector((state: any) => state.currentCategory);
-  const currentColor = useSelector((state: any) => state.currentColor);
+  const tasks = useSelector((state: RootState) => state.tasks);
+  const currentCategory = useSelector((state: RootState) => state.currentCategory);
+  const currentColor = useSelector((state: RootState) => state.currentColor);
 
   const dispatch = useDispatch();
 

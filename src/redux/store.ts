@@ -14,4 +14,6 @@ const store = configureStore({
     }
 })
 
+export type RootState = ReturnType<typeof store.getState> // root state for useSelector!
+
 export default store;

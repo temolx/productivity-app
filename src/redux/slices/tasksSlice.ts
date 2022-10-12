@@ -11,7 +11,7 @@ export interface tasksType {
     priority: boolean
 }
 
-interface tasksState {
+export interface tasksState {
     value: tasksType[]
 }
 

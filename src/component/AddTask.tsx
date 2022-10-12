@@ -5,6 +5,7 @@ import { tasksType } from '../redux/slices/tasksSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { hide } from '../redux/slices/sidebarSlice'
 import { addTask } from '../redux/slices/tasksSlice'
+import { RootState } from '../redux/store'
 
 interface IProps {
     setSidebarMobile: React.Dispatch<React.SetStateAction<boolean>>
@@ -24,7 +25,7 @@ const AddTask: FC<IProps> = ({ setSidebarMobile }: IProps) => {
     const[error, setError] = useState<string>('');
 
     const dispatch = useDispatch();
-    const tasks = useSelector((state: any) => state.tasks);
+    const tasks = useSelector((state: RootState) => state.tasks);
 
 
     const validateName = () => {
